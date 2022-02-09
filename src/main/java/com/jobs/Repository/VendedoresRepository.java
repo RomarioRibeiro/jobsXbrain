@@ -3,9 +3,9 @@ package com.jobs.Repository;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
 
-import com.jobs.domain.Vendedores;
+import com.jobs.domain.Vendedor;
 
-public interface VendedoresRepository extends JpaRepository<Vendedores, Integer>{
-	@Query(value="select*from apartamento where id = ?",nativeQuery = true )
-Vendedores find(Integer id);
+public interface VendedoresRepository extends JpaRepository<Vendedor, Integer>{
+	@Query(value="select*from vendedor where id = ?",nativeQuery = true )
+Vendedor find(Integer id);
 }

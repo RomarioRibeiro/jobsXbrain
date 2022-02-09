@@ -1,13 +1,18 @@
 package com.jobs.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 import java.util.Objects;
 
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.ManyToMany;
+import javax.persistence.ManyToOne;
 @Entity
 public class Venda implements Serializable {
 
@@ -16,20 +21,47 @@ private static final long serialVersionUID = 1L;
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id ;
-	private String nome;
-	private Date dataDaVenda ;
-	private Produto produto;
+	private Date dataDaVenda;
+	@ManyToOne
+	private Vendedor vendedor;
+	private BigDecimal valorTotal;
+	
+    @ManyToMany
+	private List<Produto> produtos = new ArrayList<>();
 	
 	public Venda() {
 		super();
 	}
 
+	public Vendedor getVendedor() {
+		return vendedor;
+	}
+
+	public void setVendedor(Vendedor vendedor) {
+		this.vendedor = vendedor;
+	}
+
+	public BigDecimal getValorTotal() {
+		return valorTotal;
+	}
+
+	public void setValorTotal(BigDecimal valorTotal) {
+		this.valorTotal = valorTotal;
+	}
+
+	public List<Produto> getProdutos() {
+		return produtos;
+	}
+
+	public void setProdutos(List<Produto> produtos) {
+		this.produtos = produtos;
+	}
+
 	public Venda(Integer id, String nome, Date dataDaVenda, Produto produto) {
 		super();
 		this.id = id;
-		this.nome = nome;
 		this.dataDaVenda = dataDaVenda;
-		this.produto = produto;
+
 	}
 
 	public Integer getId() {
@@ -40,13 +72,7 @@ private static final long serialVersionUID = 1L;
 		this.id = id;
 	}
 
-	public String getNome() {
-		return nome;
-	}
 
-	public void setNome(String nome) {
-		this.nome = nome;
-	}
 
 	public Date getDataDaVenda() {
 		return dataDaVenda;
@@ -56,13 +82,7 @@ private static final long serialVersionUID = 1L;
 		this.dataDaVenda = dataDaVenda;
 	}
 
-	public Produto getProduto() {
-		return produto;
-	}
-
-	public void setProduto(Produto produto) {
-		this.produto = produto;
-	}
+	
 
 	@Override
 	public int hashCode() {
@@ -83,7 +103,7 @@ private static final long serialVersionUID = 1L;
 
 	@Override
 	public String toString() {
-		return "Venda [id=" + id + ", nome=" + nome + ", dataDaVenda=" + dataDaVenda + ", produto=" + produto + "]";
+		return "Venda [id=" + id + ", dataDaVenda=" + dataDaVenda + "]";
 	}
 	
 	

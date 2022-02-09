@@ -1,6 +1,7 @@
 package com.jobs.domain;
 
 import java.io.Serializable;
+import java.math.BigDecimal;
 import java.util.Objects;
 
 import javax.persistence.Entity;
@@ -16,33 +17,29 @@ private static final long serialVersionUID = 1L;
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private Integer id ;
 	private String nome ;
-	private String preco;
-	private Venda venda;
+	private BigDecimal preco;
 	
+
 	
+	public BigDecimal getPreco() {
+		return preco;
+	}
+
+	public void setPreco(BigDecimal preco) {
+		this.preco = preco;
+	}
+
 	public Produto() {
 		super();
 	}
-
-
-	public Produto(Integer id, String nome, String preco, Venda venda) {
-		super();
-		this.id = id;
-		this.nome = nome;
-		this.preco = preco;
-		this.venda = venda;
-	}
-
 
 	public Integer getId() {
 		return id;
 	}
 
-
 	public void setId(Integer id) {
 		this.id = id;
 	}
-
 
 	public String getNome() {
 		return nome;
@@ -53,26 +50,12 @@ private static final long serialVersionUID = 1L;
 		this.nome = nome;
 	}
 
-
-	public String getPreco() {
-		return preco;
-	}
-
-
-	public void setPreco(String preco) {
+	public Produto(Integer id, String nome, BigDecimal preco) {
+		super();
+		this.id = id;
+		this.nome = nome;
 		this.preco = preco;
 	}
-
-
-	public Venda getVenda() {
-		return venda;
-	}
-
-
-	public void setVenda(Venda venda) {
-		this.venda = venda;
-	}
-
 
 	@Override
 	public int hashCode() {
@@ -90,12 +73,6 @@ private static final long serialVersionUID = 1L;
 			return false;
 		Produto other = (Produto) obj;
 		return Objects.equals(id, other.id);
-	}
-
-
-	@Override
-	public String toString() {
-		return "Produto [id=" + id + ", nome=" + nome + ", preco=" + preco + ", venda=" + venda + "]";
 	}
 	
 	
