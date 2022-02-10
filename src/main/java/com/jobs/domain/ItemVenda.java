@@ -6,10 +6,13 @@ import java.util.Locale;
 
 import javax.persistence.EmbeddedId;
 import javax.persistence.Entity;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
 @Entity
 public class ItemVenda implements Serializable {
 	private static final long serialVersionUID = 1L;
 	
+	@JsonIgnore
 	@EmbeddedId
 	private ItemnVendaPK id  = new ItemnVendaPK();
 	
@@ -21,9 +24,10 @@ public class ItemVenda implements Serializable {
 		super();
 	}
 
-	public ItemVenda(ItemnVendaPK id, Double desconto, Integer quantidade, Double preco) {
+	public ItemVenda(Produto produto,Venda venda, Double desconto, Integer quantidade, Double preco) {
 		super();
-		this.id = id;
+		id.setProduto(produto);
+		id.setVenda(venda);
 		this.desconto = desconto;
 		this.quantidade = quantidade;
 		this.preco = preco;

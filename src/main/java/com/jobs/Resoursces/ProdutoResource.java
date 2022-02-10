@@ -1,9 +1,9 @@
 package com.jobs.Resoursces;
 
 import java.net.URI;
+import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -15,6 +15,7 @@ import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
 import com.jobs.Repository.ProdutoRepository;
 import com.jobs.Service.ProdutoService;
 import com.jobs.domain.Produto;
+import com.jobs.dto.ProdutoDto;
 
 @RestController
 @RequestMapping(value = "/produto")
@@ -53,6 +54,12 @@ public class ProdutoResource {
 	public ResponseEntity<Void> delete (@PathVariable Integer id){
 		service.delete(id);
 		return ResponseEntity.noContent().build();
+	}
+	
+	@RequestMapping(method =RequestMethod.GET)
+	public ResponseEntity<List<ProdutoDto>> findAll() {
+		List<ProdutoDto> list = service.findAll();
+		return ResponseEntity.ok().body(list);
 	}
 	
 }

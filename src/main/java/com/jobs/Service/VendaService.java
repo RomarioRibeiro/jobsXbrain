@@ -1,11 +1,15 @@
 package com.jobs.Service;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.dao.DataIntegrityViolationException;
 import org.springframework.stereotype.Service;
 
 import com.jobs.Repository.VendaRepository;
 import com.jobs.domain.Venda;
+import com.jobs.dto.VendaDto;
 
 @Service
 public class VendaService {
@@ -22,15 +26,26 @@ public class VendaService {
 		return repo.find(id);
 	}
 	
+	
+	public List<VendaDto> findAll() {
+		List<Venda> venda = repo.findAll();
+		List<VendaDto> vendaDto = new ArrayList<>();
+		for (Venda a : venda) {
+			VendaDto Dto = new VendaDto(a);
+			vendaDto.add(Dto);
+		}
+
+		return vendaDto;
+	}
+	
 	public Venda insert(Venda obj) {
-		Venda venda = new Venda();
-		return repo.save(venda);
+		find(obj.getId());
+		return repo.save(obj);
 	}
 	
 	public Venda update(Venda obj) {
-		Venda venda = new Venda();
-		venda.getId();
-		return repo.save(venda) ;
+		find(obj.getId());
+		return repo.save(obj) ;
 	}
 
 
