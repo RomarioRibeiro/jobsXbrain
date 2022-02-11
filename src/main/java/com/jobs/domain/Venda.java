@@ -2,17 +2,19 @@ package com.jobs.domain;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
-import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
 import java.util.Objects;
+import java.util.Set;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.ManyToMany;
 import javax.persistence.ManyToOne;
+import javax.persistence.OneToMany;
 @Entity
 public class Venda implements Serializable {
 
@@ -26,12 +28,27 @@ private static final long serialVersionUID = 1L;
 	private Vendedor vendedor;
 	private BigDecimal valorTotal;
 	
-    @ManyToMany
-	private List<Produto> produtos = new ArrayList<>();
-	
-	public Venda() {
+    @OneToMany(mappedBy = "id.venda", cascade = CascadeType.REMOVE)
+	private Set<ItemVenda> itensVenda = new HashSet<>();
+
+    
+    public Venda() {
 		super();
 	}
+
+    
+    
+	public Set<ItemVenda> getItensVenda() {
+		return itensVenda;
+	}
+
+
+
+	public void setItensVenda(Set<ItemVenda> itensVenda) {
+		this.itensVenda = itensVenda;
+	}
+
+
 
 	public Vendedor getVendedor() {
 		return vendedor;
@@ -49,13 +66,7 @@ private static final long serialVersionUID = 1L;
 		this.valorTotal = valorTotal;
 	}
 
-	public List<Produto> getProdutos() {
-		return produtos;
-	}
 
-	public void setProdutos(List<Produto> produtos) {
-		this.produtos = produtos;
-	}
 
 	public Venda(Integer id, String nome, Date dataDaVenda, Produto produto) {
 		super();

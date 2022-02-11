@@ -6,6 +6,6 @@ import org.springframework.data.jpa.repository.Query;
 import com.jobs.domain.Vendedor;
 
 public interface VendedoresRepository extends JpaRepository<Vendedor, Integer>{
-	@Query(value="select*from vendedor where id = ?",nativeQuery = true )
-Vendedor find(Integer id);
+	@Query(value="select * from vendedor where id = ?",nativeQuery = true )
+    Vendedor find(Integer id);
 }

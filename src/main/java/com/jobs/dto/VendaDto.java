@@ -2,9 +2,13 @@ package com.jobs.dto;
 
 import java.io.Serializable;
 import java.math.BigDecimal;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
+import com.jobs.domain.ItemVenda;
 import com.jobs.domain.Produto;
 import com.jobs.domain.Venda;
 
@@ -19,11 +23,24 @@ public class VendaDto implements Serializable {
 	private String nome;
 	private Date dataNasc;
 	private String email;
-	private List<Produto> produtoId;
-	private String produnoNome ;
-	private BigDecimal preco;
+	private Set<ItemVenda> itensVenda = new HashSet<>();
 	
 	
+
+
+
+	public Set<ItemVenda> getItensVenda() {
+		return itensVenda;
+	}
+
+
+
+	public void setItensVenda(Set<ItemVenda> itensVenda) {
+		this.itensVenda = itensVenda;
+	}
+
+
+
 	public VendaDto() {
 		super();
 	}
@@ -40,9 +57,7 @@ public class VendaDto implements Serializable {
 		this.nome = nome;
 		this.dataNasc = dataNasc;
 		this.email = email;
-		this.produtoId = produtoId;
-		this.produnoNome = produnoNome;
-		this.preco = preco;
+		
 	}
 
 
@@ -55,7 +70,9 @@ public class VendaDto implements Serializable {
 		this.nome= obj.getVendedor().getNome();
 		this.dataNasc = obj.getVendedor().getDataNasc();
 		this.email = obj.getVendedor().getEmail();
-		this.produtoId= obj.getProdutos();
+		this.itensVenda = obj.getItensVenda();
+		
+		
 	
 		
 		
@@ -147,39 +164,11 @@ public class VendaDto implements Serializable {
 
 
 
-	public List<Produto> getProdutoId() {
-		return produtoId;
-	}
+	
 
 
 
-	public void setProdutoId(List<Produto> produtoId) {
-		this.produtoId = produtoId;
-	}
-
-
-
-	public String getProdunoNome() {
-		return produnoNome;
-	}
-
-
-
-	public void setProdunoNome(String produnoNome) {
-		this.produnoNome = produnoNome;
-	}
-
-
-
-	public BigDecimal getPreco() {
-		return preco;
-	}
-
-
-
-	public void setPreco(BigDecimal preco) {
-		this.preco = preco;
-	}
+	
 
 	
 	

@@ -36,18 +36,16 @@ public class VendaResource {
 	}
 	
 	@RequestMapping(method = RequestMethod.POST)
-	public ResponseEntity<Void> insert(@RequestBody Venda obj) {
+	public ResponseEntity<Void> insert(@RequestBody VendaDto obj) {
 		Venda venda = service.insert(obj);
 		URI uri = ServletUriComponentsBuilder.fromCurrentRequest().path("/{id}").buildAndExpand(obj.getId()).toUri();
 		return ResponseEntity.created(uri).build();
 	}
 
 	@RequestMapping(value = "/{id}",method = RequestMethod.PUT)
-	public ResponseEntity<Venda> update(@RequestBody Venda obj, @PathVariable Integer id){
-		Venda venda =service.update(obj);
-		venda.setId(id);
-		 venda = service.update(obj);
-		
+	public ResponseEntity<Venda> update(@RequestBody VendaDto obj, @PathVariable Integer id){
+		obj.setId(id);
+		Venda venda = service.update(obj);		
 		return ResponseEntity.noContent().build();
 	}
 	@RequestMapping(value= "/{id}",method = RequestMethod.DELETE)
@@ -56,8 +54,7 @@ public class VendaResource {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(method =RequestMethod.GET)
-	
+	@RequestMapping(method =RequestMethod.GET)	
 	public ResponseEntity<List<VendaDto>> findAll() {
 		List<VendaDto> list = service.findAll();
 		return ResponseEntity.ok().body(list);
